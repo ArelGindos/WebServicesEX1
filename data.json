@@ -1,0 +1,51 @@
+{
+	"Grades":{
+		"School":"Shenkar",
+		"NumberOfStudents": 10,
+		"City" : "Ramat Gan",
+		"Students":[
+			{
+				"StudentId": 101,
+                "Student name": "Moshe Cohen",
+                "Student age": 22,
+                "StudentAverageGrades": 98,
+                "year" : 2016
+			},
+			{
+				"StudentId": 102,
+                "Student name": "jenia Losco",
+                "Student age": 23,
+                "StudentAverageGrades": 72,
+                "year" : 2015
+			},
+			{
+				"StudentId": 103,
+                "Student name": "Odi Levi",
+                "Student age": 24,
+                "StudentAverageGrades": 89.5,
+                "year" : 2014
+			},
+			{
+				"StudentId": 104,
+                "Student name": "Avi Cohen",
+                "Student age": 26,
+                "StudentAverageGrades": 93.5,
+                "year" : 2014
+			},
+			{
+				"StudentId": 105,
+                "Student name": "Yael German",
+                "Student age": 28,
+                "StudentAverageGrades": 67.5,
+                "year" : 2013
+			},
+			{
+				"StudentId": 106,
+                "Student name": "Moshe Kazav",
+                "Student age": 29,
+                "StudentAverageGrades": 75.5,
+                "year" : 2013
+			}
+		]
+	}
+}
