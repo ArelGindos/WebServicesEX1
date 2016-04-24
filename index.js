@@ -1,10 +1,12 @@
 var express = require('express');
+var http = require('http');
 var app = express();
 var port = process.env.PORT || 3000;
 var fs = require('fs');
 var jsonData = JSON.parse(fs.readFileSync('./data.json', 'utf8'));
 var ShenkarGrades = require('./grades_modules');
 var ShenkarSchool = new ShenkarGrades(jsonData);
+
 
 app.get('/getAllStudentsGrades', function(req,res){
 	res.json(ShenkarSchool.getAllStudentsGrades());
@@ -29,6 +31,5 @@ app.all('*', function(req,res){
 			  'api': 'www.github.com'});
 });
 
-
-app.listen(port);
+http.createServer(app).listen(port);
 console.log('listening on port' + port);
