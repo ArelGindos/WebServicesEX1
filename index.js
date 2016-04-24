@@ -28,7 +28,7 @@ app.get('/', function(req,res){
 
 app.all('*', function(req,res){
 	res.json({'Error' : 'oops... you pressed wrong path, please look at the api',
-			  'api': 'www.github.com'});
+			  'api': 'https://github.com/ArelGindos/WebServicesEX1'});
 });
 
 http.createServer(app).listen(port);
