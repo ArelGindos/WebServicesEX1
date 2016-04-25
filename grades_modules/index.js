@@ -27,6 +27,7 @@ class ShenkarGrades extends EventEmitter {
             });
            if (jsonStud == null){
             jsonStud = {'Error': 'Wrong Id',
+                        'status':false,
                        'ShowAll': 'to see the list of students => path: getAllStudentsGrades'};
             }
             this.json = jsonStud;
@@ -59,32 +60,35 @@ class ShenkarGrades extends EventEmitter {
             }
             this.json = jsonStudent;
             if(jsonStudent==null){ // if we didnt find any students in the year
-                this.json = {'Error':'cant find any students in year: ' +year};
+                this.json = {'Error':'cant find any students in year: ' +year,'status':false};
             }
         });
     }
 
     getAllStudentsGrades() {
         this.emit(eventsConfig.GETALL);
-         console.log('\n---------------------List Of Students---------------------\n\n'+this.data);
+            console.log('\n---------------------List Of Students---------------------\n\n'+this.data);
         return this.data;
     }
 
     getStudGradeById(id) {
        this.emit(eventsConfig.GETSTUDENT,id);
-      console.log('\n---------------------Student with id:'+ id +' JSON---------------------\n\n'+this.json);
+       if(this.data.status == false)
+            console.log('\n---------------------Student with id:'+ id +' JSON---------------------\n\n'+this.json);
        return this.json;
     }
 
     getExcellenceByYear(year) {
         this.emit(eventsConfig.GETEXCELLENCWORSTESTUDENT,year,"excellence");
-        console.log('\n---------------------Best student in year:'+ year +' JSON---------------------\n\n'+this.json);
+        if(this.data.status == false)
+            console.log('\n---------------------Best student in year:'+ year +' JSON---------------------\n\n'+this.json);
         return this.json;
     }
 
     getWorstAverageByYear(year){
         this.emit(eventsConfig.GETEXCELLENCWORSTESTUDENT,year,"worst");
-        console.log('\n---------------------Worst student in year:'+ year +' JSON---------------------\n\n'+this.json);
+        if(this.data.status != false)
+            console.log('\n---------------------Worst student in year:'+ year +' JSON---------------------\n\n'+this.json);
         return this.json;
     }
 }

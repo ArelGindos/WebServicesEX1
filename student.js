@@ -1,6 +1,6 @@
-var mongoose = require('mongoose');
-var schema = mongoose.Schema;
-
+var mongoose = require('mongoose'),
+	schema = mongoose.Schema,
+	Student;
 // Scehma for mongoDB students for use it in the model
 var schema_name = new schema({
 	studentId: Number,
@@ -10,6 +10,6 @@ var schema_name = new schema({
 	bestYear:Number
 }, {collection: 'Grades'});
 
-var Student = mongoose.model('Student', schema_name);
+Student = mongoose.model('Student', schema_name);
 
 module.exports = Student;
