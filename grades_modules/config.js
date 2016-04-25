@@ -4,6 +4,7 @@ module.exports = {
     events: {
         GETALL: 'getAllStudentsGrades',
         GETSTUDENT: 'getStudGradeById',
-        GETEXCELLENCESTUDENT: 'getExcellenceByYear'
+        GETEXCELLENCESTUDENT: 'getExcellenceByYear',
+        GETWORSTAVERAGEBYYEAR:'getWorstAverageByYear'
     }
 };

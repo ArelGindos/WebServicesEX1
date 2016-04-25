@@ -4,8 +4,6 @@ var EventEmitter = require('events').EventEmitter,
     express = require('express'),
     eventsConfig = require('./config').events;
 
-var logData;
-
 class ShenkarGrades extends EventEmitter {
     constructor(StudentsData) {
         super();
@@ -21,10 +19,9 @@ class ShenkarGrades extends EventEmitter {
 
          // will run in a loop and search for id and return a json
         this.on(eventsConfig.GETSTUDENT, function(id) { 
-           var jsonGrades = this.data.Grades.Students;
            var jsonStud = null;
-           jsonGrades.forEach(function(entry) {
-                if(entry.StudentId == id){
+            this.data.forEach(function(entry) {
+                if(entry.studentId == id){
                     jsonStud = entry;
                 }
             });
@@ -35,25 +32,33 @@ class ShenkarGrades extends EventEmitter {
             this.json = jsonStud;
         });
 
-        //will return the best student by the year
-        this.on(eventsConfig.GETEXCELLENCESTUDENT, function(year) {
-            var jsonGrades = this.data.Grades.Students;
-            console.log(jsonGrades);
+        //will return the best or worst student by the year
+        this.on(eventsConfig.GETEXCELLENCWORSTESTUDENT, function(year,FlagWorstExcell) {
+            var jsonGrades = this.data;
             var jsonStudent = null;
             var jsonGradesLen = jsonGrades.length;
             for(var i = 0;i<jsonGradesLen;i++){
-                if(jsonGrades[i].year == year){
+                if(jsonGrades[i].bestYear == year){
                     if(jsonStudent == null){
                         jsonStudent = jsonGrades[i];
                     }
-                    if(jsonStudent != null &&   // if we got already student in the year, will compare the grade
-                        jsonStudent.StudentAverageGrades<jsonGrades[i].StudentAverageGrades){
-                        jsonStudent = jsonGrades[i];
+                    if(FlagWorstExcell == "excellence"){
+                        if(jsonStudent != null &&   // if we got already student in the year, will compare the grade
+                        jsonStudent.studentAverageGrades<jsonGrades[i].studentAverageGrades){
+                            jsonStudent = jsonGrades[i];
+                        }
+                    }
+
+                    else if(FlagWorstExcell == "worst"){  
+                        if(jsonStudent != null &&   // if we got already student in the year, will compare the grade
+                        jsonStudent.studentAverageGrades>jsonGrades[i].studentAverageGrades){
+                            jsonStudent = jsonGrades[i];
+                        }
                     }
                 }
             }
             this.json = jsonStudent;
-            if(jsonStudent==null){
+            if(jsonStudent==null){ // if we didnt find any students in the year
                 this.json = {'Error':'cant find any students in year: ' +year};
             }
         });
@@ -61,20 +66,28 @@ class ShenkarGrades extends EventEmitter {
 
     getAllStudentsGrades() {
         this.emit(eventsConfig.GETALL);
+         console.log('\n---------------------List Of Students---------------------\n\n'+this.data);
         return this.data;
     }
 
     getStudGradeById(id) {
        this.emit(eventsConfig.GETSTUDENT,id);
+      console.log('\n---------------------Student with id:'+ id +' JSON---------------------\n\n'+this.json);
        return this.json;
     }
 
     getExcellenceByYear(year) {
-        this.emit(eventsConfig.GETEXCELLENCESTUDENT,year);
+        this.emit(eventsConfig.GETEXCELLENCWORSTESTUDENT,year,"excellence");
+        console.log('\n---------------------Best student in year:'+ year +' JSON---------------------\n\n'+this.json);
+        return this.json;
+    }
+
+    getWorstAverageByYear(year){
+        this.emit(eventsConfig.GETEXCELLENCWORSTESTUDENT,year,"worst");
+        console.log('\n---------------------Worst student in year:'+ year +' JSON---------------------\n\n'+this.json);
         return this.json;
     }
 }
-
 module.exports = ShenkarGrades;
 
 

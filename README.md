@@ -9,15 +9,21 @@ https://studentsgrades.herokuapp.com/getAllStudentsGrades
 
 ##Get a student by id:
 in order to get a student by id u should use this path:
-https://studentsgrades.herokuapp.com/getStudGradeById/<id>
+https://studentsgrades.herokuapp.com/getStudGradeById/id
 
-where <id> is a place holder for the id you want to get.
+where id is a place holder for the id you want to get.
 
 ##Get Excellence student by year:
 in order to get excellence student by year, use this path:
-https://studentsgrades.herokuapp.com/getExcellenceByYear/<year>
+https://studentsgrades.herokuapp.com/getExcellenceByYear/year
 
-where <year> is a place holder for the year you want;
+where year is a place holder for the year you want;
+
+##Get Worst student by year:
+in order to get excellence student by year, use this path:
+https://studentsgrades.herokuapp.com/getWorstAverageByYear/year
+
+where year is a place holder for the year you want;
 
 #####For any questions you can contact me at: rlgindos@gmail.com
 #####all right reserved, Arel Gindos 2016.
