@@ -1,7 +1,9 @@
 # Shenkar Students Grades API
 this web appication created to give ways to get grades of students.
 the response of all the objects returning as JSON objects.
-if you get all data it will be a big JSON Object.
+in first place, the progrem create a server that connect to mongoDB to get all the data and save it 
+in the program.
+then by the path entered, returning a JSON.
 
 ##Get All The Data:
 in order to get all the data u should use this path:
